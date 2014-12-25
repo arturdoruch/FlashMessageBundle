@@ -69,6 +69,18 @@ See "Resources/views/messages.html.twig" file.
 
 ## Usage
 
+### Controller
+
+```php
+public function indexAction()
+{
+    $flash = $this->get('arturdoruch_flash_message');
+    // or simply
+    $flash = $this->get('ad_flash');
+    ...
+}
+```
+
 ###View
 
 For display messages just call function "ad_flash_message"
