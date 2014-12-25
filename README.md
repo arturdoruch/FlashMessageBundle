@@ -1,15 +1,14 @@
 FlashMessageBundle
 ================
 
-Flash message manager working with Symfony session flashBag.
-Allows in very convenient way add or set flash messages and display those translated in a view template.
+Flash message manager working with Symfony session flashBag. 
+Allows in very convenient way add or set flash messages and display them in a view template.
 
-Features:
-    Add or set messages
-    add or set crud operations messages
-
-     Get - sets and return translated message
-     Get crud - sets and return translated message without them into flashbag.
+<!--Features:
+Add or set messages
+add or set crud operations messages
+Get - sets and return translated message
+Get crud - sets and return translated message without them into flashbag.-->
 
 
 ## Installation
@@ -27,7 +26,7 @@ Install bundle by running command.
 php composer.phar update arturdoruch/flash-message-bundle
 ```
 
-Add ArturDoruchFlashMessageBundle to application kernel
+Add ArturDoruchFlashMessageBundle to your application kernel.
 ```php
 // app/AppKernel.php
 public function registerBundles()
@@ -40,16 +39,18 @@ public function registerBundles()
 ```
 
 ## Configuration
-This bundle configured under the "artur_doruch_flash_message" key in your application configuration.
+This bundle configured under the `artur_doruch_flash_message` key in your application configuration.
 
-classes
+####<i>classes</i>
 
-type: object default:
+<b>type</b>: array <b>default</b>:
+```
     success: success
     error: danger
     notice: warning
+```
 
-An array of key-value pairs, where key is a message type, and value a css class name.
+An array of key-value pairs, where key is a message type and value a css class name.
 This parameter allows to define string that can be used in template as CSS class name for stylize displaying messages.
 See example.
 
@@ -68,15 +69,15 @@ See "Resources/views/messages.html.twig" file.
 
 ## Usage
 
-View
+###View
 
 For display messages just call function "ad_flash_message"
 ```twig
     {{ ad_flash_messages() }}
 ```
 
-If you want add CSS styles for displaying messages...
+<!--If you want add CSS styles for displaying messages...
 
 Function "ad_flash_messages_class_name" returns css class name related to message type.
-See "Resources/views/messages.html.twig" file.
+See "Resources/views/messages.html.twig" file.-->
 
