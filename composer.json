@@ -1,0 +1,20 @@
+{
+    "name": "arturdoruch/flash-message-bundle",
+    "description": "Flash message notification bundle for Symfony2.",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "keywords": ["flash", "message", "notification", "symfony2", "bundle"],
+    "authors": [
+        {
+            "name": "Artur Doruch",
+            "email": "arturdoruch@interia.pl"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": ">2.0",
+        "twig/extensions": "~1.0"
+    },
+    "autoload": {
+        "psr-4" : { "ArturDoruch\\FlashMessageBundle\\" : "" }
+    }
+}

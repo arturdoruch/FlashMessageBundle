@@ -1,0 +1,8 @@
+crud:
+    add:
+        success: New %entity% <b>%item%</b> has been properly added.
+    update:
+        success: %entity% <b>%item%</b> has been updated.
+    remove:
+        success: %entity% <b>%item%</b> has been successfuly removed.
+        error: %entity% <b>%item%</b> was not removed.

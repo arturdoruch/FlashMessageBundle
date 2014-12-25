@@ -1,0 +1,14 @@
+{% if messages|length > 0 %}
+    <div class="row">
+        <div class="col-md-12">
+        {% for type, typeMessages in messages %}
+            {% for message in typeMessages %}
+                <div class="alert alert-{{ ad_flash_messages_class_name(type) }} alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ message|raw }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+{% endif %}
