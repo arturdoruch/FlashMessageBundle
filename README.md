@@ -86,12 +86,58 @@ public function indexAction()
 Flash messages service is helpfull when we doing some actions and wanted to give back to user some response information about action status.
 Setting message is automaticly transplated with domain: "messages" for normal message or "crudMessages" for crud actions message.
 
-
-
 Service provides several methods for add, set or get flash message.
-If we use methods starts with "add" or "set", then message will be added into session flash bag.
-But methods starts with "get" only prepare message and return her without adding to session flash bug.
+If we use methods starts with "add" or "set", then message will be added into `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
+But methods starts with "get" only prepare message and return her without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
 
+All avaiable methods are created dynamicly and because of this your IDE, may not showing completitions.
+
+Sets custom type translated flash message. Override previous message is was set.
+```php set(string $type, $message = null, array $parameters = array(), string $domain = null)```
+
+Instead sets $type by hand you can use these defined methods:
+```php
+    setSuccess($message = null, array $parameters = array(), string $domain = null)
+    setError($message = null, array $parameters = array(), string $domain = null)
+    setNotice($message = null, array $parameters = array(), string $domain = null)
+```
+
+Adds custom type translated flash message.
+```php
+    add(string $type, $message = null, array $parameters = array(), string $domain = null)
+
+    addSuccess($message = null, array $parameters = array(), string $domain = null)
+    addError($message = null, array $parameters = array(), string $domain = null)
+    addNotice($message = null, array $parameters = array(), string $domain = null)
+```
+
+Difference between methods "set" and "add" is obvious. "Add" adds new message into array type collection, "Set" override existing array messages collection by new one. 
+
+Gets custom type translated message. Not adds into session flash bug.
+Just creates, translates and returns message.
+```php
+    get(string $type, $message = null, array $parameters = array(), string $domain = null)
+
+    getSuccess($message = null, array $parameters = array(), string $domain = null)
+    getError($message = null, array $parameters = array(), string $domain = null)
+    getNotice($message = null, array $parameters = array(), string $domain = null)
+```
+
+
+
+ * Adds custom type CRUD action translated flash message.
+ * @method addCrud(string $type, string $entity, $item = null, string $action = null)
+ *
+ * @method addCrudSuccess(string $entity, $item = null, string $action = null)
+ * @method addCrudNotice(string $entity, $item = null, string $action = null)
+ * @method addCrudError(string $entity, $item = null, string $action = null)
+ *
+ * Gets custom type CRUD action translated message.
+ * @method getCrud(string $type, string $entity, $item = null, string $action = null)
+ *
+ * @method getCrudSuccess(string $entity, $item = null, string $action = null)
+ * @method getCrudNotice(string $entity, $item = null, string $action = null)
+ * @method getCrudError(string $entity, $item = null, string $action = null)
 
 
 ###View
