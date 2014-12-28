@@ -83,16 +83,19 @@ public function indexAction()
 }
 ```
 
-Flash messages service is helpfull when we doing some actions and wanted to give back to user some response information about action status.
-Setting message is automaticly transplated with domain: "messages" for normal message or "crudMessages" for crud actions message.
+Flash messages service is helpful, when we want to give user some response information about action status.
+Every message set by this service is automaticly translated by `Symfony\Component\Translation\Translation` with "messages" domain. For CRUD actions by default is uses "crudMessages" domain.
 
+####Methods
 Service provides several methods for add, set or get flash message.
-If we use methods starts with "add" or "set", then message will be added into `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
-But methods starts with "get" only prepare message and return her without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
+Methods starts with "add" or "set", added messages into `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`. Next we can display adding messages collection in view template.
+
+
+Methods starts with "get" only prepare message and return without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
 
 All avaiable methods are created dynamicly and because of this your IDE, may not showing completitions.
 
-#### Set
+##### Set
 ```php
     // Sets custom type translated flash message. Override previous message is was set.
     public function set(string $type, $message = null, array $parameters = array(), string $domain = null)
@@ -105,7 +108,7 @@ Instead sets $type by hand you can use these convinient methods:
     public function setNotice($message = null, array $parameters = array(), string $domain = null)
 ```
 
-#### Add 
+##### Add 
 
 ```php
     // Adds custom type translated flash message
@@ -118,7 +121,7 @@ Instead sets $type by hand you can use these convinient methods:
 
 Difference between methods "set" and "add" is obvious. "Add" adds new message into array flashBag collection, while "Set" override existing array messages collection by new one. 
 
-#### Get
+##### Get
 ```php
     // Gets custom type translated message. Not adds into session flash bug.
     // Just creates, translates and returns message.
@@ -128,7 +131,6 @@ Difference between methods "set" and "add" is obvious. "Add" adds new message in
     public function getError($message = null, array $parameters = array(), string $domain = null)
     public function getNotice($message = null, array $parameters = array(), string $domain = null)
 ```
-
 
 
  * Adds custom type CRUD action translated flash message.
