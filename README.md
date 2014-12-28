@@ -71,6 +71,8 @@ See "Resources/views/messages.html.twig" file.
 
 ### Controller
 
+Get flash message service.
+
 ```php
 public function indexAction()
 {
@@ -80,6 +82,17 @@ public function indexAction()
     ...
 }
 ```
+
+Flash messages service is helpfull when we doing some actions and wanted to give back to user some response information about action status.
+Setting message is automaticly transplated with domain: "messages" for normal message or "crudMessages" for crud actions message.
+
+
+
+Service provides several methods for add, set or get flash message.
+If we use methods starts with "add" or "set", then message will be added into session flash bag.
+But methods starts with "get" only prepare message and return her without adding to session flash bug.
+
+
 
 ###View
 
