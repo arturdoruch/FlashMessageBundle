@@ -92,35 +92,41 @@ But methods starts with "get" only prepare message and return her without adding
 
 All avaiable methods are created dynamicly and because of this your IDE, may not showing completitions.
 
-Sets custom type translated flash message. Override previous message is was set.
-```php set(string $type, $message = null, array $parameters = array(), string $domain = null)```
-
-Instead sets $type by hand you can use these defined methods:
+#### Set
 ```php
-    setSuccess($message = null, array $parameters = array(), string $domain = null)
-    setError($message = null, array $parameters = array(), string $domain = null)
-    setNotice($message = null, array $parameters = array(), string $domain = null)
+    // Sets custom type translated flash message. Override previous message is was set.
+    public function set(string $type, $message = null, array $parameters = array(), string $domain = null)
 ```
 
-Adds custom type translated flash message.
+Instead sets $type by hand you can use these convinient methods:
 ```php
-    add(string $type, $message = null, array $parameters = array(), string $domain = null)
-
-    addSuccess($message = null, array $parameters = array(), string $domain = null)
-    addError($message = null, array $parameters = array(), string $domain = null)
-    addNotice($message = null, array $parameters = array(), string $domain = null)
+    public function setSuccess($message = null, array $parameters = array(), string $domain = null)
+    public function setError($message = null, array $parameters = array(), string $domain = null)
+    public function setNotice($message = null, array $parameters = array(), string $domain = null)
 ```
 
-Difference between methods "set" and "add" is obvious. "Add" adds new message into array type collection, "Set" override existing array messages collection by new one. 
+#### Add 
 
-Gets custom type translated message. Not adds into session flash bug.
-Just creates, translates and returns message.
 ```php
-    get(string $type, $message = null, array $parameters = array(), string $domain = null)
+    // Adds custom type translated flash message
+    public function add(string $type, $message = null, array $parameters = array(), string $domain = null)
 
-    getSuccess($message = null, array $parameters = array(), string $domain = null)
-    getError($message = null, array $parameters = array(), string $domain = null)
-    getNotice($message = null, array $parameters = array(), string $domain = null)
+    public function addSuccess($message = null, array $parameters = array(), string $domain = null)
+    public function addError($message = null, array $parameters = array(), string $domain = null)
+    public function addNotice($message = null, array $parameters = array(), string $domain = null)
+```
+
+Difference between methods "set" and "add" is obvious. "Add" adds new message into array flashBag collection, while "Set" override existing array messages collection by new one. 
+
+#### Get
+```php
+    // Gets custom type translated message. Not adds into session flash bug.
+    // Just creates, translates and returns message.
+    public function get(string $type, $message = null, array $parameters = array(), string $domain = null)
+
+    public function getSuccess($message = null, array $parameters = array(), string $domain = null)
+    public function getError($message = null, array $parameters = array(), string $domain = null)
+    public function getNotice($message = null, array $parameters = array(), string $domain = null)
 ```
 
 
