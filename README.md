@@ -88,7 +88,7 @@ Every message set by this service is automaticly translated by `Symfony\Componen
 
 ####Methods
 Service provides several methods for add, set or get flash message.
-Methods starts with "add" or "set", added messages into `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`. Next we can display adding messages collection in view template.
+Methods starts with "add" or "set", added messages into `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`. Which next we can display them in view template.
 
 
 Methods starts with "get" only prepare message and return without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
