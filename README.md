@@ -91,7 +91,7 @@ Service provides several methods for add, set or get flash message.
 Methods starts with "add" or "set", added messages into `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`. Which next we can display them in view template.
 
 
-Methods starts with "get" only prepare message and return without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
+Methods starts with "get" only prepare message and returns it without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`. It's useful if you want to return translated message (for expample if you woth with REST api or Ajax request). 
 
 All avaiable methods are created dynamicly and because of this your IDE, may not showing completitions.
 
