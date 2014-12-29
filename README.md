@@ -142,11 +142,31 @@ Now when we ...
 ```
  
 
-##### Set
+##### Messages for anything other actions.
 ```php
     // Sets custom type translated flash message. Override previous message is was set.
     public function set(string $type, $message = null, array $parameters = array(), string $domain = null)
 ```
+
+<dl>
+    <dt>$type</dt>
+    <dd><b>type</b>: string <b>required</b></dd>
+    <dd>Message type. It's might be any string. For types: "success", "error", "notice" use dedicated methods.
+    </dd>
+    
+    <dt>$message</dt>
+    <dd><b>type</b>: string</dd>
+    <dd>If null then message will be dinamically create as translation key based on controller action name. Assumed we have controller `Acme\DemoBunlde\Controller\ProjectController::createAction` key will be creates in convention: `acme_demo_project.create.$type`.
+    </dd>
+    
+    <dt>$parameters</dt>
+    <dd><b>type</b>: array</dd>
+    <dd>Parameters for translator message.</dd>
+    
+    <dt>$domain</dt>
+    <dd><b>type</b>: string <b>default</b>: "messages"</dd>
+    <dd>Translation domain.</dd>
+</dl>
 
 Instead sets $type by hand you can use these convenient methods:
 ```php
@@ -155,7 +175,7 @@ Instead sets $type by hand you can use these convenient methods:
     public function setNotice($message = null, array $parameters = array(), string $domain = null)
 ```
 
-##### Add
+Other methods
 
 ```php
     // Adds custom type translated flash message
@@ -164,12 +184,7 @@ Instead sets $type by hand you can use these convenient methods:
     public function addSuccess($message = null, array $parameters = array(), string $domain = null)
     public function addError($message = null, array $parameters = array(), string $domain = null)
     public function addNotice($message = null, array $parameters = array(), string $domain = null)
-```
 
-Difference between methods "set" and "add" is obvious. "Add" adds new message into array flashBag collection, while "Set" override existing array messages collection by new one.
-
-##### Get
-```php
     // Gets custom type translated message. Not adds into session flash bug.
     // Just creates, translates and returns message.
     public function get(string $type, $message = null, array $parameters = array(), string $domain = null)
@@ -178,6 +193,8 @@ Difference between methods "set" and "add" is obvious. "Add" adds new message in
     public function getError($message = null, array $parameters = array(), string $domain = null)
     public function getNotice($message = null, array $parameters = array(), string $domain = null)
 ```
+
+Difference between methods "set" and "add" is obvious. "Add" adds new message into array flashBag collection, while "Set" override existing array messages collection by new one.
 
 
 ###View
