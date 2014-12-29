@@ -94,52 +94,12 @@ Which next we can display them in view template.
 Methods starts with "get" only prepare message and returns it without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
 It's useful if you want to return translated message (for example if you work with REST api or Ajax request).
 
-
 All available methods in service `arturdoruch_flash.message` are created dynamically. They are of two types: 
-<ol>
-    <li>Messages for CRUD actions.
+    1. Messages for any actions.
+    2. Messages for CRUD actions.
 
-These methods inteligent sets message for crud actions. 
-Suppose we have entity class `Acme\DemoBundle\Entity\Product` and this entity has property `$name` and acessor method. `get`.
-Now when we ...
 
-```php 
-    // Adds custom type CRUD action translated flash message.
-    public function addCrud(string $type, string $entity, $item = null, string $action = null)
-```
-<dl>
-    <dt>$type</dt>
-    <dd><b>type</b>: string <b>required</b></dd>
-    <dd>Message type. It's might be any string. For types: "success", "error", "notice" use dedicated methods.
-    </dd>
-    
-    <dt>$entity</dt>
-    <dd><b>type</b>: object|string <b>required</b></dd>
-    <dd>Persistence object entity or simply entity name.</dd>
-    
-    <dt>$item</dt>
-    <dd><b>type</b>: string</dd>
-    <dd>Entity item name.</dd>
-    
-    <dt>$action</dt>
-    <dd><b>type</b>: string</dd>
-    <dd>Action name.</dd>
-</dl>
-
-```php
-    public function addCrudSuccess(string $entity, $item = null, string $action = null)
-    public function addCrudNotice(string $entity, $item = null, string $action = null)
-    public function addCrudError(string $entity, $item = null, string $action = null)
-    
-    // Gets custom type CRUD action translated message.
-    public function getCrud(string $type, string $entity, $item = null, string $action = null)
-    
-    public function getCrudSuccess(string $entity, $item = null, string $action = null)
-    public function getCrudNotice(string $entity, $item = null, string $action = null)
-    public function getCrudError(string $entity, $item = null, string $action = null)
-```
-</li>
-<li>Messages for anything other actions.
+#### Set, add or get messages for any actions.
 
 ```php
     // Sets custom type translated flash message. Override previous message is was set.
@@ -194,8 +154,49 @@ Other methods
 
 Difference between methods "set" and "add" is obvious. "Add" adds new message into array flashBag collection, while "Set" override existing array messages collection by new one.
 
-</li>
-</ol>
+
+#### Set, add or get messages for CRUD actions.
+
+These methods inteligent sets message for crud actions. 
+Suppose we have entity class `Acme\DemoBundle\Entity\Product` and this entity has property `$name` and acessor method. `get`.
+Now when we ...
+
+```php 
+    // Adds custom type CRUD action translated flash message.
+    public function addCrud(string $type, string $entity, $item = null, string $action = null)
+```
+<dl>
+    <dt>$type</dt>
+    <dd><b>type</b>: string <b>required</b></dd>
+    <dd>Message type. It's might be any string. For types: "success", "error", "notice" use dedicated methods.
+    </dd>
+    
+    <dt>$entity</dt>
+    <dd><b>type</b>: object|string <b>required</b></dd>
+    <dd>Persistence object entity or simply entity name.</dd>
+    
+    <dt>$item</dt>
+    <dd><b>type</b>: string</dd>
+    <dd>Entity item name.</dd>
+    
+    <dt>$action</dt>
+    <dd><b>type</b>: string</dd>
+    <dd>Action name.</dd>
+</dl>
+
+```php
+    public function addCrudSuccess(string $entity, $item = null, string $action = null)
+    public function addCrudNotice(string $entity, $item = null, string $action = null)
+    public function addCrudError(string $entity, $item = null, string $action = null)
+    
+    // Gets custom type CRUD action translated message.
+    public function getCrud(string $type, string $entity, $item = null, string $action = null)
+    
+    public function getCrudSuccess(string $entity, $item = null, string $action = null)
+    public function getCrudNotice(string $entity, $item = null, string $action = null)
+    public function getCrudError(string $entity, $item = null, string $action = null)
+```
+
 
 ###View
 
