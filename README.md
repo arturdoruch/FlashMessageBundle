@@ -87,7 +87,6 @@ Flash messages service is helpful, when we want to give user some response infor
 Every message set by this service is automatically translated by `Symfony\Component\Translation\Translation` with "messages" domain.
 For CRUD actions by default is uses "crudMessages" domain.
 
-####Methods
 Service provides several methods for add, set or get flash message.
 Methods starts with "add" or "set", added messages into `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
 Which next we can display them in view template.
@@ -95,11 +94,10 @@ Which next we can display them in view template.
 Methods starts with "get" only prepare message and returns it without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
 It's useful if you want to return translated message (for example if you work with REST api or Ajax request).
 
-All available methods in service `arturdoruch_flash.message` are created dynamically. They are of two types: 
- 1. Messages for CRUD actions.
- 2. Messages for anything other actions.
 
-##### Method sets Crud actions messages.
+All available methods in service `arturdoruch_flash.message` are created dynamically. They are of two types: 
+<ol>
+    <li>Messages for CRUD actions.
 
 These methods inteligent sets message for crud actions. 
 Suppose we have entity class `Acme\DemoBundle\Entity\Product` and this entity has property `$name` and acessor method. `get`.
@@ -140,9 +138,9 @@ Now when we ...
     public function getCrudNotice(string $entity, $item = null, string $action = null)
     public function getCrudError(string $entity, $item = null, string $action = null)
 ```
- 
+</li>
+<li>Messages for anything other actions.
 
-##### Messages for anything other actions.
 ```php
     // Sets custom type translated flash message. Override previous message is was set.
     public function set(string $type, $message = null, array $parameters = array(), string $domain = null)
@@ -196,6 +194,8 @@ Other methods
 
 Difference between methods "set" and "add" is obvious. "Add" adds new message into array flashBag collection, while "Set" override existing array messages collection by new one.
 
+</li>
+</ol>
 
 ###View
 
