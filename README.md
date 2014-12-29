@@ -99,18 +99,24 @@ All available methods in service `arturdoruch_flash.message` are created dynamic
  1. Messages for CRUD actions.
  2. Messages for anything other actions.
 
-#####Method sets Crud actions messages.
+##### Method sets Crud actions messages.
+
+These methods inteligent sets message for crud actions. 
+Suppose we have entity class `Acme\DemoBundle\Entity\Product` and this entity has property `$name` and acessor method. `get`.
+Now when we ...
 
 ```php 
+    // Adds custom type CRUD action translated flash message.
     public function addCrud(string $type, string $entity, $item = null, string $action = null)
 ```
 <dl>
     <dt>$type</dt>
-    <dd><b>type</b>: string</dd>
-    <dd>Message type. It's might be any string. For types: "success", "error", "notice" use dedicated methods.</dd>
+    <dd><b>type</b>: string <b>required</b></dd>
+    <dd>Message type. It's might be any string. For types: "success", "error", "notice" use dedicated methods.
+    </dd>
     
     <dt>$entity</dt>
-    <dd><b>type</b>: string|object</dd>
+    <dd><b>type</b>: object|string <b>required</b></dd>
     <dd>Persistence object entity or simply entity name.</dd>
     
     <dt>$item</dt>
@@ -123,9 +129,6 @@ All available methods in service `arturdoruch_flash.message` are created dynamic
 </dl>
 
 ```php
-    // Adds custom type CRUD action translated flash message.
-    public function addCrud(string $type, string $entity, $item = null, string $action = null)
-
     public function addCrudSuccess(string $entity, $item = null, string $action = null)
     public function addCrudNotice(string $entity, $item = null, string $action = null)
     public function addCrudError(string $entity, $item = null, string $action = null)
@@ -175,21 +178,6 @@ Difference between methods "set" and "add" is obvious. "Add" adds new message in
     public function getError($message = null, array $parameters = array(), string $domain = null)
     public function getNotice($message = null, array $parameters = array(), string $domain = null)
 ```
-
-
- * Adds custom type CRUD action translated flash message.
- * @method addCrud(string $type, string $entity, $item = null, string $action = null)
- *
- * @method addCrudSuccess(string $entity, $item = null, string $action = null)
- * @method addCrudNotice(string $entity, $item = null, string $action = null)
- * @method addCrudError(string $entity, $item = null, string $action = null)
- *
- * Gets custom type CRUD action translated message.
- * @method getCrud(string $type, string $entity, $item = null, string $action = null)
- *
- * @method getCrudSuccess(string $entity, $item = null, string $action = null)
- * @method getCrudNotice(string $entity, $item = null, string $action = null)
- * @method getCrudError(string $entity, $item = null, string $action = null)
 
 
 ###View
