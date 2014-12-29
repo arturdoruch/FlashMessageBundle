@@ -114,7 +114,7 @@ All available methods in service `arturdoruch_flash.message` are created dynamic
     
     <dt>$message</dt>
     <dd><b>type</b>: string</dd>
-    <dd>If null then message will be dinamically create as translation key based on controller action name. Assumed we have controller `Acme\DemoBunlde\Controller\ProjectController::createAction` key will be creates in convention: `acme_demo_project.create.$type`.
+    <dd>If null then message will be dinamically create as translation key based on controller action name. Assumed we have controller ```Acme\DemoBunlde\Controller\ProjectController::createAction``` key will be creates in convention: `acme_demo_project.create.$type`.
     </dd>
     
     <dt>$parameters</dt>
@@ -122,7 +122,7 @@ All available methods in service `arturdoruch_flash.message` are created dynamic
     <dd>Parameters for translator message.</dd>
     
     <dt>$domain</dt>
-    <dd><b>type</b>: string <b>default</b>: "messages"</dd>
+    <dd><b>type</b>: string <b>default</b>: messages</dd>
     <dd>Translation domain.</dd>
 </dl>
 
@@ -152,14 +152,13 @@ Other methods
     public function getNotice($message = null, array $parameters = array(), string $domain = null)
 ```
 
-Difference between methods "set" and "add" is obvious. "Add" adds new message into array flashBag collection, while "Set" override existing array messages collection by new one.
+Difference between methods "set" and "add" is obvious. "add" adds new message into flashBag array collection, while "set" override existing array messages collection by new one.
 
 
 #### Set, add or get messages for CRUD actions.
 
 These methods inteligent sets message for crud actions. 
 Suppose we have entity class `Acme\DemoBundle\Entity\Product` and this entity has property `$name` and acessor method. `get`.
-Now when we ...
 
 ```php 
     // Adds custom type CRUD action translated flash message.
