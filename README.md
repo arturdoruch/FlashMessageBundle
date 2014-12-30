@@ -193,17 +193,17 @@ public function getCrudError($entity, $item = null, $action = null) {}
 
 ###View
 
-Display flash messages
+For display flash messages just write this line of code into your base template file or wherever you want.
 ```twig
     {{ ad_flash_messages() }}
 ```
 
-Gets message type class name.
+#####Optional
 ```twig
     {{ ad_flash_messages_class_name(type) }}
 ```
-This function returns CSS class name related to given message type.
-Allows to customize diplaying messages by CSS style.
+This function returns CSS class name related to given message type parameter.
+Allows to customize displaying messages by CSS style.
 See how <a href="#classes">configuration CSS classes names.</a>
 
 
