@@ -1,15 +1,9 @@
 FlashMessageBundle
 ================
 
-Flash message manager working with Symfony session flashBag.
-Allows in very convenient way add or set flash messages and display them in a view template.
-
-<!--Features:
-Add or set messages
-add or set crud operations messages
-Get - sets and return translated message
-Get crud - sets and return translated message without them into flashbag.-->
-
+FlashMessageBundle allows in very convenient way set flash messages and display them in a view template.
+Is helpful, when we want to give user some response information about controller action status.
+Flash message manager working with `Symfony\Component\HttpFoundation\Session\Flash\FlashBag` and every setting message is automatically translated by `Symfony\Component\Translation\Translation`.
 
 ## Installation
 
@@ -52,7 +46,6 @@ This bundle configured under the `artur_doruch_flash_message` key in your applic
 
 An array of key-value pairs, where key is a message type and value a css class name.
 This parameter allows to define string that can be used in template as CSS class name for stylize displaying messages.
-See example.
 
 ```yml
 // app/config/config.yml
@@ -63,23 +56,14 @@ artur_doruch_flash_message:
         custom: custom-class-name
 ```
 
-To use this parameter in template call "ad_flash_messages_class_name" function with message type as parameter.
-See "Resources/views/messages.html.twig" file.
-
+To use this parameter in template call `ad_flash_messages_class_name(type)` function with message type as parameter.
+See `Resources/views/messages.html.twig` file.
 
 ## Usage
 
 ### Controller
 
-Flash messages service is helpful, when we want to give user some response information about controller action status.
-Every message setting by this service is automatically translated by `Symfony\Component\Translation\Translation` with "messages" domain. For CRUD messages is used "crudMessages" domain.
-
-Service provides several methods for add, set or get message.
-Methods starting with "add" or "set", adds or sets messages to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
-which next we can display in view template.
-
-Methods starting with "get" only prepare message and returns it without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
-It's useful if you want to return translated message (for example if you work with REST api or Ajax request).
+Every message setting by service `ad_flash_message` is automatically translated by `Symfony\Component\Translation\Translation` with "messages" domain. For CRUD messages is used "crudMessages" domain.
 
 Get flash message service.
 
@@ -91,12 +75,13 @@ public function indexAction()
 }
 ```
 
+#### Set, add messages
 
-#### Set, add or get messages for any actions.
+Methods starting with name "add" or "set", adds or sets messages to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`, which next we can display in view template.
 
 ```php
 /**
- * Sets and translates custom type flash message. Overrides previous message if was set.
+ * Translates custom type message and sets it into session flash bag. Overrides previous message if was set.
  *
  * @param string      $type        Can be any string describing action status. For types: "success", "error", "notice"
  *                                 use dedicated methods "setSuccess", "setError", "setNotice".
@@ -121,6 +106,11 @@ public function add($type, $message = null, array $parameters = array(), $domain
 ```
 
 Difference between methods "set" and "add" is obvious. "add" adds new message into flashBag array collection, while "set" override existing array messages collection by new one.
+
+##### Get messages
+
+Methods starting with name "get" only prepare message and returns it without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
+It's useful if you want to return translated message (for example if you work with REST api or Ajax request).
 
 ```php
 /**
