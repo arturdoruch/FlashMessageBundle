@@ -154,8 +154,8 @@ public function getNotice($message = null, array $parameters = array(), $domain 
  * @param string $type         Can be any string describing action status. For types: "success", "error", "notice"
  *                             use dedicated methods "addCrudSuccess", "addCrudError", "addCrudNotice".
  *
- * @param string $entity       Persistence entity object or entity name. Is used as parameter %entity% in 
- translation files.
+ * @param string $entity       Persistence entity object or entity name. Is used as parameter %entity%
+ *                             in translation files.
  *                             For more clarify see "Resources/translations/crudMessages.en.yml" file.
  *
  * @param null|string $item    Single entity object name. Is used as parameter %item% in translation files.
@@ -204,10 +204,9 @@ Gets message type class name.
 ```
 This function returns CSS class name related to given message type.
 Allows to customize diplaying messages by CSS style.
-<a href="#classes">Configuration CSS classes names.</a>
-You can defining these CSS classes in `app/config.yml` file in your app.
-For more clarify see `Resources/views/messages.html.twig` file.
+See how <a href="#classes">configuration CSS classes names.</a>
 
-Of course you can customize displaying messages template by overriding `Resources/views/messages.html.twig` file.
-To do this put template file into `app/Resources/ArturDoruchFlashMessageBundle/views/messages.html.twig` location in your Symfony application.
+
+Of course you can customize whole messages template by overriding `Resources/views/messages.html.twig` file.
+To do this put template file into `app/Resources/ArturDoruchFlashMessageBundle/views/messages.html.twig` location in your Symfony app.
 
