@@ -242,11 +242,13 @@ public function updateAction(Product $product, Request $request)
     $product->setName('Framework');
     
     // Create and valid form. If form is valid save entity and set flash message.
+    
     $flash = $this->get('ad_flash_message');
     // Message will be "Product Framework has been updated."
     $flash->addCrudSuccess($product);
     
-    // For this message in translation file "crudMessages" must be defined key 'crud.customaction.success'.
+    // For this message in translation file "crudMessages" must be defined
+    // new key 'crud.customaction.success'.
     $flash->addCrudSuccess('Product2', 'Bundle', 'customAction');
     // Add Crud message with custom type.
     $flash->add('customType', 'Product', 'Github');
