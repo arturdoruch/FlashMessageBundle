@@ -71,6 +71,16 @@ See "Resources/views/messages.html.twig" file.
 
 ### Controller
 
+Flash messages service is helpful, when we want to give user some response information about controller action status.
+Every message setting by this service is automatically translated by `Symfony\Component\Translation\Translation` with "messages" domain. For CRUD messages is used "crudMessages" domain.
+
+Service provides several methods for add, set or get message.
+Methods starting with "add" or "set", adds or sets messages to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
+which next we can display in view template.
+
+Methods starting with "get" only prepare message and returns it without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
+It's useful if you want to return translated message (for example if you work with REST api or Ajax request).
+
 Get flash message service.
 
 ```php
@@ -81,80 +91,60 @@ public function indexAction()
 }
 ```
 
-Flash messages service is helpful, when we want to give user some response information about action status.
-Every message set by this service is automatically translated by `Symfony\Component\Translation\Translation` with "messages" domain.
-For CRUD actions by default is uses "crudMessages" domain.
-
-Service provides several methods for add, set or get flash message.
-Methods starts with "add" or "set", added messages into `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
-Which next we can display them in view template.
-
-Methods starts with "get" only prepare message and returns it without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
-It's useful if you want to return translated message (for example if you work with REST api or Ajax request).
-
-All available methods in service `arturdoruch_flash.message` are created dynamically. They are of two types: 
-    1. Messages for any actions.
-    2. Messages for CRUD actions.
-
 
 #### Set, add or get messages for any actions.
 
 ```php
-    /** Sets custom type flash message and translates it. Overrides previous message if was set.
-     * 
-     * @param string $type
-     * @param string|null $message
-     * @param array $parameters
-     * @param string|null $domain
+/**
+ * Sets and translates custom type flash message. Overrides previous message if was set.
+ *
+ * @param string        $type        Can be any string describing action status. For types: "success", "error", "notice"
+ *                                   use dedicated methods "setSuccess", "setError", "setNotice".
+ *
+ * @param string|null   $message     Message text. Given text is always translated by "Symfony\Component\Translation\Translation"
+ *                                   with "message" domain as default (of course if exists any translations for given string).
+ *                                   If $message is null then will be dynamically creates as "translationId" based
+ *                                   on called controller action name in convention: "company_bundle_controller.action.$type".
+ *                                   For example, if we call this method (and $message is null) in controller
+ *                                   "App\DemoBundle\Controller\ProductController::createAction"
+ *                                   then will be generated this "translationId" value:     "app_demo_project.create.$type".
+ *
+ * @param array         $parameters  Parameters for translation message.
+ * @param string|null   $domain      Translation domain. As default is "messages".
+ */
+    public function set($type, $message = null, array $parameters = array(), $domain = null) {}
+
+    /**
+     * Adds and translates custom type flash message.
      */
-    public function set($type, $message = null, array $parameters = array(), $domain = null)
+    public function add($type, $message = null, array $parameters = array(), $domain = null) {}
+
+    /**
+     * Gets custom type translated flash message.
+     * This method not adds message into session flash bug.
+     * Just creates, translates and returns it.
+     */
+    public function get($type, $message = null, array $parameters = array(), $domain = null) {}
+
+    /**
+     * Other available methods sets, adds or gets messages with concrete types: "Success", "Error", "Notice".
+     */
+    public function setSuccess($message = null, array $parameters = array(), $domain = null) {}
+    public function setError($message = null, array $parameters = array(), $domain = null) {}
+    public function setNotice($message = null, array $parameters = array(), $domain = null) {}
+
+    public function addSuccess($message = null, array $parameters = array(), $domain = null) {}
+    public function adsError($message = null, array $parameters = array(), $domain = null) {}
+    public function addNotice($message = null, array $parameters = array(), $domain = null) {}
+
+    public function getSuccess($message = null, array $parameters = array(), $domain = null) {}
+    public function getError($message = null, array $parameters = array(), $domain = null) {}
+    public function getNotice($message = null, array $parameters = array(), $domain = null) {}
 ```
 
-<dl>
-    <dt>$type</dt>
-    <dd><b>type</b>: string <b>required</b></dd>
-    <dd>Message type. It's might be any string. For types: "success", "error", "notice" use dedicated methods.
-    </dd>
-    
-    <dt>$message</dt>
-    <dd><b>type</b>: string</dd>
-    <dd>If null then message will be dinamically create as translation key based on controller action name. Assumed we have controller ```Acme\DemoBunlde\Controller\ProjectController::createAction``` key will be creates in convention: `acme_demo_project.create.$type`.
-    </dd>
-    
-    <dt>$parameters</dt>
-    <dd><b>type</b>: array</dd>
-    <dd>Parameters for translator message.</dd>
-    
-    <dt>$domain</dt>
-    <dd><b>type</b>: string <b>default</b>: messages</dd>
-    <dd>Translation domain.</dd>
-</dl>
+Instead sets $type by hand you can use these convenient methods.
 
-Instead sets $type by hand you can use these convenient methods:
-```php
-    public function setSuccess($message = null, array $parameters = array(), string $domain = null)
-    public function setError($message = null, array $parameters = array(), string $domain = null)
-    public function setNotice($message = null, array $parameters = array(), string $domain = null)
-```
 
-Other methods
-
-```php
-    // Adds custom type translated flash message
-    public function add(string $type, $message = null, array $parameters = array(), string $domain = null)
-
-    public function addSuccess($message = null, array $parameters = array(), string $domain = null)
-    public function addError($message = null, array $parameters = array(), string $domain = null)
-    public function addNotice($message = null, array $parameters = array(), string $domain = null)
-
-    // Gets custom type translated message. Not adds into session flash bug.
-    // Just creates, translates and returns message.
-    public function get(string $type, $message = null, array $parameters = array(), string $domain = null)
-
-    public function getSuccess($message = null, array $parameters = array(), string $domain = null)
-    public function getError($message = null, array $parameters = array(), string $domain = null)
-    public function getNotice($message = null, array $parameters = array(), string $domain = null)
-```
 
 Difference between methods "set" and "add" is obvious. "add" adds new message into flashBag array collection, while "set" override existing array messages collection by new one.
 
