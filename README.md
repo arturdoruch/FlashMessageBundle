@@ -1,7 +1,7 @@
 FlashMessageBundle
 ================
 
-FlashMessageBundle allows in very convenient way set flash messages and display them in a view template.
+FlashMessageBundle allows in very convenient way sets or adds flash messages.
 Is helpful, when we want to give user some response information about controller action status.
 Flash message manager working with `Symfony\Component\HttpFoundation\Session\Flash\FlashBag` and every setting message is automatically translated by `Symfony\Component\Translation\Translation`.
 
@@ -35,6 +35,7 @@ public function registerBundles()
 ## Configuration
 This bundle configured under the `artur_doruch_flash_message` key in your application configuration.
 
+<a name="#classes"></a>
 ####<i>classes</i>
 
 <b>type</b>: array <b>default</b>:
@@ -65,7 +66,7 @@ See `Resources/views/messages.html.twig` file.
 
 Every message setting by service `ad_flash_message` is automatically translated by `Symfony\Component\Translation\Translation` with "messages" domain. For CRUD messages is used "crudMessages" domain.
 
-Get flash message service.
+To get flash message service.
 
 ```php
 public function indexAction()
@@ -107,10 +108,10 @@ public function add($type, $message = null, array $parameters = array(), $domain
 
 Difference between methods "set" and "add" is obvious. "add" adds new message into flashBag array collection, while "set" override existing array messages collection by new one.
 
-##### Get messages
+#### Get messages
 
-Methods starting with name "get" only prepare message and returns it without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`.
-It's useful if you want to return translated message (for example if you work with REST api or Ajax request).
+Methods starting with name "get" only prepare message and returns it without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`. 
+It's useful if you want to return translated message. For example if you work with REST api or Ajax request.
 
 ```php
 /**
@@ -199,11 +200,14 @@ Display flash messages
 
 Gets message type class name.
 ```twig
-    {{ ad_flash_messages_class_name() }}
+    {{ ad_flash_messages_class_name(type) }}
 ```
+This function returns CSS class name related to given message type.
+Allows to customize diplaying messages by CSS style.
+<a href="#classes">Configuration CSS classes names.</a>
+You can defining these CSS classes in `app/config.yml` file in your app.
+For more clarify see `Resources/views/messages.html.twig` file.
 
-<!--If you want add CSS styles for displaying messages...
-
-Function "ad_flash_messages_class_name" returns css class name related to message type.
-See "Resources/views/messages.html.twig" file.-->
+Of course you can customize displaying messages template by overriding `Resources/views/messages.html.twig` file.
+To do this put template file into `app/Resources/ArturDoruchFlashMessageBundle/views/messages.html.twig` location in your Symfony application.
 
