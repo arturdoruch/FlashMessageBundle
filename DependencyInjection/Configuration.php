@@ -25,7 +25,6 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('classes')
                     ->defaultValue(array())
                     ->useAttributeAsKey('name')
-                    //->normalizeKeys(false)
                     ->prototype('scalar')
                     ->end()
                 ->end()

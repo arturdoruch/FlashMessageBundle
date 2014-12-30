@@ -3,11 +3,9 @@ services:
             class: ArturDoruch\FlashMessageBundle\Message\MessageTranslatorHelper
             arguments: [@translator, @request_stack]
 
-    arturdoruch_flash_message:
+    ad_flash_message:
         class: ArturDoruch\FlashMessageBundle\Message\MessageManager
         arguments: [@session, @arturdoruch_flash_message.helper.translator]
-    ad_flash:
-        alias: arturdoruch_flash_message
 
     arturdoruch_flash_message.templating_helper:
         class: ArturDoruch\FlashMessageBundle\Templating\Helper\FlashMessageHelper
