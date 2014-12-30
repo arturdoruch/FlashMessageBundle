@@ -271,7 +271,7 @@ For displaying flash messages just write this line of code into your base templa
     {{ ad_flash_messages_class_name(type) }}
 ```
 This function returns CSS class name related to given message type parameter.
-Allows to customize displaying messages by CSS style.
+Helps to customize displaying messages by CSS style.
 See how <a href="#classes">configuration CSS classes names.</a>
 
 
