@@ -197,6 +197,65 @@ public function getCrudNotice($entity, $item = null, $action = null) {}
 public function getCrudError($entity, $item = null, $action = null) {}
 ```
 
+####Example usage
+
+```php
+public function indexAction()
+{
+    ...
+    $flash = $this->get('ad_flash_message');
+
+    // Set flash messages
+    $flash->setSuccess();
+    $flash->setError();
+    $flash->set('customType', 'Some flash message');
+
+    // Add another message for "success" type array collection.
+    $flash->addSuccess('Another success message');
+}
+
+public function sendEmailAction()
+{
+    ...
+    $flash = $this->get('ad_flash_message');
+
+    // Set flash messages with custom domain
+    // Email was successfully send.
+    $parameters = array(
+        '%user%' => 'John Doe'
+    );
+    $flash->setSuccess(null, $parameters, 'emailMessages');
+    
+    // Failure email sending.
+    $flash->setError(null, array(), 'emailMessages');
+
+    // Get flash message
+    return new Response($flash->getSuccess(null, $parameters, 'emailMessages'));
+}
+```
+
+CRUD example.
+```php
+public function updateAction(Product $product, Request $request)
+{
+    ...
+    $product->setName('Framework');
+    
+    // Create and valid form. If form is valid save entity and set flash message.
+    $flash = $this->get('ad_flash_message');
+    // Message will be "Product Framework has been updated."
+    $flash->addCrudSuccess($product);
+    
+    // For this message in translation file "crudMessages" must be defined key 'crud.customaction.success'.
+    $flash->addCrudSuccess('Product2', 'Bundle', 'customAction');
+    // Add Crud message with custom type.
+    $flash->add('customType', 'Product', 'Github');
+    
+    // Get message
+    $updateSuccessMsg = $flash->getCrudSuccess($product);
+}
+```
+
 ###View
 
 For displaying flash messages just write this line of code into your base template file or wherever you want.
