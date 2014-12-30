@@ -2,7 +2,7 @@ FlashMessageBundle
 ================
 
 FlashMessageBundle allows in very convenient way sets or adds flash messages.
-Is helpful, when we want to give user some response information about controller action status.
+It's helpful, when we want to give user some response information about controller action status.
 Flash message manager working with `Symfony\Component\HttpFoundation\Session\Flash\FlashBag` and every setting message is automatically translated by `Symfony\Component\Translation\Translation`.
 
 ## Installation
@@ -20,7 +20,7 @@ Install bundle by running command.
 php composer.phar update arturdoruch/flash-message-bundle
 ```
 
-Add ArturDoruchFlashMessageBundle to your application kernel.
+Add bundle to your application kernel.
 ```php
 // app/AppKernel.php
 public function registerBundles()
@@ -64,7 +64,7 @@ See `Resources/views/messages.html.twig` file.
 
 ### Controller
 
-Every message setting by service `ad_flash_message` is automatically translated by `Symfony\Component\Translation\Translation` with "messages" domain. For CRUD messages is used "crudMessages" domain.
+Every message setting by service `ad_flash_message` is automatically translated by `Symfony\Component\Translation\Translation`.
 
 To get flash message service.
 
@@ -76,8 +76,9 @@ public function indexAction()
 }
 ```
 
-#### Set, add messages
+##### Set, add messages
 
+By default flash messages are translated with "messages" domain.
 Methods starting with name "add" or "set", adds or sets messages to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`, which next we can display in view template.
 
 ```php
@@ -108,7 +109,7 @@ public function add($type, $message = null, array $parameters = array(), $domain
 
 Difference between methods "set" and "add" is obvious. "add" adds new message into flashBag array collection, while "set" override existing array messages collection by new one.
 
-#### Get messages
+##### Get messages
 
 Methods starting with name "get" only prepare message and returns it without adding to `Symfony\Component\HttpFoundation\Session\Flash\FlashBag`. 
 It's useful if you want to return translated message. For example if you work with REST api or Ajax request.
@@ -142,6 +143,11 @@ public function getNotice($message = null, array $parameters = array(), $domain 
 ```
 
 #### Add or get messages for CRUD actions.
+
+FlashMessageBundle provides methods to straitforword setting flash messages, when we're doing repetitive CRUD operations.
+Messages for CRUD action are translated with "crudMessages" domain.
+See `Resources/translations/crudMessages.en.yml` file in this bundle.
+
 ```php
 /**
  * Adds and translates flash message for CRUD action.
@@ -193,7 +199,7 @@ public function getCrudError($entity, $item = null, $action = null) {}
 
 ###View
 
-For display flash messages just write this line of code into your base template file or wherever you want.
+For displaying flash messages just write this line of code into your base template file or wherever you want.
 ```twig
     {{ ad_flash_messages() }}
 ```
