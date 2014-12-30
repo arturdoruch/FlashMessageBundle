@@ -98,19 +98,19 @@ public function indexAction()
 /**
  * Sets and translates custom type flash message. Overrides previous message if was set.
  *
- * @param string        $type        Can be any string describing action status. For types: "success", "error", "notice"
- *                                   use dedicated methods "setSuccess", "setError", "setNotice".
+ * @param string      $type        Can be any string describing action status. For types: "success", "error", "notice"
+ *                                 use dedicated methods "setSuccess", "setError", "setNotice".
  *
- * @param string|null   $message     Message text. Given text is always translated by "Symfony\Component\Translation\Translation"
- *                                   with "message" domain as default (of course if exists any translations for given string).
- *                                   If $message is null then will be dynamically creates as "translationId" based
- *                                   on called controller action name in convention: "company_bundle_controller.action.$type".
- *                                   For example, if we call this method (and $message is null) in controller
- *                                   "App\DemoBundle\Controller\ProductController::createAction"
- *                                   then will be generated this "translationId" value:     "app_demo_project.create.$type".
+ * @param string|null $message     Message text. Given text is always translated by "Symfony\Component\Translation\Translation"
+ *                                 with "message" domain as default (of course if exists any translations for given string).
+ *                                 If $message is null then will be dynamically creates as "translationId" based
+ *                                 on called controller action name in convention: "company_bundle_controller.action.$type".
+ *                                 For example, if we call this method (and $message is null) in controller
+ *                                 "App\DemoBundle\Controller\ProductController::createAction"
+ *                                 then will be generated this "translationId" value: "app_demo_project.create.$type".
  *
- * @param array         $parameters  Parameters for translation message.
- * @param string|null   $domain      Translation domain. As default is "messages".
+ * @param array       $parameters  Parameters for translation message.
+ * @param string|null $domain      Translation domain. As default is "messages".
  */
 public function set($type, $message = null, array $parameters = array(), $domain = null) {}
 
@@ -150,7 +150,7 @@ public function getError($message = null, array $parameters = array(), $domain =
 public function getNotice($message = null, array $parameters = array(), $domain = null) {}
 ```
 
-#### Set, add or get messages for CRUD actions.
+#### Add or get messages for CRUD actions.
 ```php
 /**
  * Adds and translates flash message for CRUD action.
@@ -164,7 +164,7 @@ public function getNotice($message = null, array $parameters = array(), $domain 
  *                             use dedicated methods "addCrudSuccess", "addCrudError", "addCrudNotice".
  *
  * @param string $entity       Persistence entity object or entity name. Is used as parameter %entity% in 
-                               translation files.
+ translation files.
  *                             For more clarify see "Resources/translations/crudMessages.en.yml" file.
  *
  * @param null|string $item    Single entity object name. Is used as parameter %item% in translation files.
@@ -202,9 +202,14 @@ public function getCrudError($entity, $item = null, $action = null) {}
 
 ###View
 
-For display messages just call function "ad_flash_message"
+Display flash messages
 ```twig
     {{ ad_flash_messages() }}
+```
+
+Gets message type class name.
+```twig
+    {{ ad_flash_messages_class_name() }}
 ```
 
 <!--If you want add CSS styles for displaying messages...
