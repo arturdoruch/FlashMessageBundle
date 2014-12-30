@@ -142,7 +142,7 @@ public function getNotice($message = null, array $parameters = array(), $domain 
 
 #### Add or get messages for CRUD actions.
 
-FlashMessageBundle provides methods to straitforword setting flash messages, when we're doing repetitive CRUD operations.
+FlashMessageBundle provides methods for the easy way setting flash messages, when we're doing repetitive CRUD operations.
 Messages for CRUD action are translated with "crudMessages" domain.
 See `Resources/translations/crudMessages.en.yml` file in this bundle.
 
