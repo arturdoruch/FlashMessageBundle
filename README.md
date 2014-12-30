@@ -60,9 +60,7 @@ artur_doruch_flash_message:
 To use this parameter in template call `ad_flash_messages_class_name(type)` function with message type as parameter.
 See `Resources/views/messages.html.twig` file.
 
-## Usage
-
-### Controller
+## Controller
 
 Every message setting by service `ad_flash_message` is automatically translated by `Symfony\Component\Translation\Translation`.
 
@@ -197,7 +195,7 @@ public function getCrudNotice($entity, $item = null, $action = null) {}
 public function getCrudError($entity, $item = null, $action = null) {}
 ```
 
-####Example usage
+### Example usage
 
 ```php
 public function indexAction()
@@ -234,7 +232,8 @@ public function sendEmailAction()
 }
 ```
 
-CRUD example.
+#####CRUD example.
+
 ```php
 public function updateAction(Product $product, Request $request)
 {
@@ -258,7 +257,9 @@ public function updateAction(Product $product, Request $request)
 }
 ```
 
-###View
+##View
+
+###Usage
 
 For displaying flash messages just write this line of code into your base template file or wherever you want.
 ```twig
