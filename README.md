@@ -112,84 +112,93 @@ public function indexAction()
  * @param array         $parameters  Parameters for translation message.
  * @param string|null   $domain      Translation domain. As default is "messages".
  */
-    public function set($type, $message = null, array $parameters = array(), $domain = null) {}
+public function set($type, $message = null, array $parameters = array(), $domain = null) {}
 
-    /**
-     * Adds and translates custom type flash message.
-     */
-    public function add($type, $message = null, array $parameters = array(), $domain = null) {}
+/**
+ * Adds and translates custom type flash message.
+ */
+public function add($type, $message = null, array $parameters = array(), $domain = null) {}
+```
 
-    /**
-     * Gets custom type translated flash message.
-     * This method not adds message into session flash bug.
-     * Just creates, translates and returns it.
-     */
-    public function get($type, $message = null, array $parameters = array(), $domain = null) {}
+Difference between methods "set" and "add" is obvious. "add" adds new message into flashBag array collection, while "set" override existing array messages collection by new one.
 
-    /**
-     * Other available methods sets, adds or gets messages with concrete types: "Success", "Error", "Notice".
-     */
-    public function setSuccess($message = null, array $parameters = array(), $domain = null) {}
-    public function setError($message = null, array $parameters = array(), $domain = null) {}
-    public function setNotice($message = null, array $parameters = array(), $domain = null) {}
-
-    public function addSuccess($message = null, array $parameters = array(), $domain = null) {}
-    public function adsError($message = null, array $parameters = array(), $domain = null) {}
-    public function addNotice($message = null, array $parameters = array(), $domain = null) {}
-
-    public function getSuccess($message = null, array $parameters = array(), $domain = null) {}
-    public function getError($message = null, array $parameters = array(), $domain = null) {}
-    public function getNotice($message = null, array $parameters = array(), $domain = null) {}
+```php
+/**
+ * Gets custom type translated flash message.
+ * This method not adds message into session flash bug.
+ * Just creates, translates and returns it.
+ */
+public function get($type, $message = null, array $parameters = array(), $domain = null) {}
 ```
 
 Instead sets $type by hand you can use these convenient methods.
 
+```php
+/**
+ * Available methods sets, adds or gets messages with concrete types: "Success", "Error", "Notice".
+ */
+public function setSuccess($message = null, array $parameters = array(), $domain = null) {}
+public function setError($message = null, array $parameters = array(), $domain = null) {}
+public function setNotice($message = null, array $parameters = array(), $domain = null) {}
 
+public function addSuccess($message = null, array $parameters = array(), $domain = null) {}
+public function adsError($message = null, array $parameters = array(), $domain = null) {}
+public function addNotice($message = null, array $parameters = array(), $domain = null) {}
 
-Difference between methods "set" and "add" is obvious. "add" adds new message into flashBag array collection, while "set" override existing array messages collection by new one.
-
+public function getSuccess($message = null, array $parameters = array(), $domain = null) {}
+public function getError($message = null, array $parameters = array(), $domain = null) {}
+public function getNotice($message = null, array $parameters = array(), $domain = null) {}
+```
 
 #### Set, add or get messages for CRUD actions.
-
-These methods inteligent sets message for crud actions. 
-Suppose we have entity class `Acme\DemoBundle\Entity\Product` and this entity has property `$name` and acessor method. `get`.
-
-```php 
-    // Adds custom type CRUD action translated flash message.
-    public function addCrud(string $type, string $entity, $item = null, string $action = null)
-```
-<dl>
-    <dt>$type</dt>
-    <dd><b>type</b>: string <b>required</b></dd>
-    <dd>Message type. It's might be any string. For types: "success", "error", "notice" use dedicated methods.
-    </dd>
-    
-    <dt>$entity</dt>
-    <dd><b>type</b>: object|string <b>required</b></dd>
-    <dd>Persistence object entity or simply entity name.</dd>
-    
-    <dt>$item</dt>
-    <dd><b>type</b>: string</dd>
-    <dd>Entity item name.</dd>
-    
-    <dt>$action</dt>
-    <dd><b>type</b>: string</dd>
-    <dd>Action name.</dd>
-</dl>
-
 ```php
-    public function addCrudSuccess(string $entity, $item = null, string $action = null)
-    public function addCrudNotice(string $entity, $item = null, string $action = null)
-    public function addCrudError(string $entity, $item = null, string $action = null)
-    
-    // Gets custom type CRUD action translated message.
-    public function getCrud(string $type, string $entity, $item = null, string $action = null)
-    
-    public function getCrudSuccess(string $entity, $item = null, string $action = null)
-    public function getCrudNotice(string $entity, $item = null, string $action = null)
-    public function getCrudError(string $entity, $item = null, string $action = null)
-```
+/**
+ * Adds and translates flash message for CRUD action.
+ * Generates "translationId" based on given parameters values and/or
+ * dynamically generated based on $entity value and called controller name.
+ * Generated "translationId" has format "crud.action.type".
+ * All CRUD messages are translated with "crudMessages" domain.
+ * See 'Resources/translations/crudMessages.en.yml'.
+ *
+ * @param string $type         Can be any string describing action status. For types: "success", "error", "notice"
+ *                             use dedicated methods "addCrudSuccess", "addCrudError", "addCrudNotice".
+ *
+ * @param string $entity       Persistence entity object or entity name. Is used as parameter %entity% in 
+                               translation files.
+ *                             For more clarify see "Resources/translations/crudMessages.en.yml" file.
+ *
+ * @param null|string $item    Single entity object name. Is used as parameter %item% in translation files.
+ *                             For more clarify see "Resources/translations/crudMessages.en.yml" file.
+ *
+ *                             If $item is null and $entity is object then
+ *                             will attempt to call methods getName() on $entity object "$entity->getName()".
+ *                             If method exists then $item will be filled by the returned value.
+ *
+ * @param null|string $action  This parameter is used for generate "translationId".
+ *                             If null then $action is generated based on called controller action name.
+ *                             For example if called controller is     "App\DemoBundle\Controller\ProductController::createAction"
+ *                             $action will be "create".
+ */
+public function addCrud($type, $entity, $item = null, $action = null) {}
 
+/**
+ * Gets custom type translated flash message for CRUD action.
+ * This method not adds message into session flash bug.
+ * Just creates, translates and returns it.
+ */
+public function getCrud($type, $entity, $item = null, $action = null) {}
+
+/**
+ * Other available methods adds or gets CRUD messages with concrete types: "Success", "Error", "Notice".
+ */
+public function addCrudSuccess($entity, $item = null, $action = null) {}
+public function addCrudNotice($entity, $item = null, $action = null) {}
+public function addCrudError($entity, $item = null, $action = null) {}
+
+public function getCrudSuccess($entity, $item = null, $action = null) {}
+public function getCrudNotice($entity, $item = null, $action = null) {}
+public function getCrudError($entity, $item = null, $action = null) {}
+```
 
 ###View
 
