@@ -3,10 +3,12 @@
         <div class="col-md-12">
         {% for type, typeMessages in messages %}
             {% for message in typeMessages %}
+                {% if message is not iterable %}
                 <div class="alert alert-{{ ad_flash_messages_class_name(type) }} alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     {{ message|raw }}
                 </div>
+                {% endif %}
             {% endfor %}
         {% endfor %}
         </div>
