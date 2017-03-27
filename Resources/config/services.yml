@@ -1,11 +1,11 @@
 services:
     arturdoruch_flash_message.helper.translator:
-            class: ArturDoruch\FlashMessageBundle\Message\MessageTranslatorHelper
-            arguments: [@translator, @request_stack]
+        class: ArturDoruch\FlashMessageBundle\Message\MessageTranslatorHelper
+        arguments: ["@translator", "@request_stack"]
 
     ad_flash_message:
         class: ArturDoruch\FlashMessageBundle\Message\MessageManager
-        arguments: [@session, @arturdoruch_flash_message.helper.translator]
+        arguments: ["@session", "@arturdoruch_flash_message.helper.translator"]
 
     arturdoruch_flash_message.templating_helper:
         class: ArturDoruch\FlashMessageBundle\Templating\Helper\FlashMessageHelper
@@ -15,6 +15,6 @@ services:
 
     arturdoruch_flash_message.twig_extension:
         class: ArturDoruch\FlashMessageBundle\Twig\Extension\FlashMessageExtension
-        arguments: [@session, @arturdoruch_flash_message.templating_helper]
+        arguments: ["@session", "@arturdoruch_flash_message.templating_helper"]
         tags:
             - { name: twig.extension }
