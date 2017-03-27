@@ -7,20 +7,12 @@ Flash message manager working with `Symfony\Component\HttpFoundation\Session\Fla
 
 ## Installation
 
-Add bundle name for composer.json require block
-```json
-"require": {
-    ...
-    "arturdoruch/flash-message-bundle": "dev-master"
-}
-```
-
-Install bundle by running command.
+Install bundle with composer
 ```sh
-php composer.phar update arturdoruch/flash-message-bundle
+composer require arturdoruch/flash-message-bundle
 ```
 
-Add bundle to your application kernel.
+Add bundle to application kernel.
 ```php
 // app/AppKernel.php
 public function registerBundles()
