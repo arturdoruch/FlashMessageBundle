@@ -1,13 +1,13 @@
 <?php
-/**
- * @author Artur Doruch <arturdoruch@interia.pl>
- */
 
 namespace ArturDoruch\FlashMessageBundle\Twig\Extension;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use ArturDoruch\FlashMessageBundle\Templating\Helper\FlashMessageHelper as Helper;
 
+/**
+ * @author Artur Doruch <arturdoruch@interia.pl>
+ */
 class FlashMessageExtension extends \Twig_Extension
 {
     /**
@@ -20,20 +20,10 @@ class FlashMessageExtension extends \Twig_Extension
      */
     private $helper;
 
-    /**
-     * @var \Twig_Environment
-     */
-    private $environment;
-
     public function __construct(Session $session, Helper $helper)
     {
         $this->session = $session;
         $this->helper = $helper;
-    }
-
-    public function initRuntime(\Twig_Environment $environment)
-    {
-        $this->environment = $environment;
     }
 
     /**
@@ -47,19 +37,22 @@ class FlashMessageExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('ad_flash_messages', array($this, 'renderMessages'),
-                array('is_safe' => array('html'))
-            ),
-            new \Twig_SimpleFunction('ad_flash_messages_class_name', array($this, 'getMessageClassName'), array())
+            new \Twig_SimpleFunction('ad_flash_messages', [$this, 'renderMessages'], [
+                    'is_safe' => ['html'],
+                    'needs_environment' => true
+                ]),
+            new \Twig_SimpleFunction('ad_flash_messages_class_name', [$this, 'getMessageClassName'])
         );
     }
 
     /**
-     * @param null|string $type Message type. If null returns all types messages,
-     * otherwise returns messages only with given types.
+     * @param \Twig_Environment $environment
+     * @param string            $type Message type. If null returns all types messages,
+     *                                otherwise returns messages with given types.
+     *
      * @return string
      */
-    public function renderMessages($type = null)
+    public function renderMessages(\Twig_Environment $environment, $type = null)
     {
         if ($type === null) {
             $messages = $this->session->getFlashBag()->all();
@@ -67,13 +60,14 @@ class FlashMessageExtension extends \Twig_Extension
             $messages[$type] = $this->session->getFlashBag()->get($type);
         }
 
-        return $this->environment->render('ArturDoruchFlashMessageBundle::messages.html.twig', array(
+        return $environment->render('ArturDoruchFlashMessageBundle::messages.html.twig', [
                 'messages' => $messages
-            ));
+            ]);
     }
 
     /**
      * @param string $type Message type
+     *
      * @return string String to use as HTML tag class name
      */
     public function getMessageClassName($type)
