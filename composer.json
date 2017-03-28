@@ -16,5 +16,8 @@
     },
     "autoload": {
         "psr-4" : { "ArturDoruch\\FlashMessageBundle\\" : "" }
+    },
+    "suggest": {
+        "arturdoruch/bootstrap-bundle": "Allows to close displayed messages"
     }
 }
