@@ -1,7 +1,4 @@
 <?php
-/**
- * @author Artur Doruch <arturdoruch@interia.pl>
- */
 
 namespace ArturDoruch\FlashMessageBundle\Message;
 
@@ -9,13 +6,16 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Request;
 
-
+/**
+ * @author Artur Doruch <arturdoruch@interia.pl>
+ */
 class MessageTranslatorHelper
 {
     /**
      * @var TranslatorInterface
      */
     private $translator;
+
     /**
      * @var Request
      */

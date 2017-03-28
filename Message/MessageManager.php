@@ -1,7 +1,4 @@
 <?php
-/**
- * @author Artur Doruch <arturdoruch@interia.pl>
- */
 
 namespace ArturDoruch\FlashMessageBundle\Message;
 
@@ -45,6 +42,8 @@ use ArturDoruch\FlashMessageBundle\Message\MessageTranslatorHelper;
  * @method getCrudSuccess(string $entity, $item = null, string $action = null)
  * @method getCrudNotice(string $entity, $item = null, string $action = null)
  * @method getCrudError(string $entity, $item = null, string $action = null)
+ *
+ * @author Artur Doruch <arturdoruch@interia.pl>
  */
 class MessageManager
 {

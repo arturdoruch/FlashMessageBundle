@@ -1,13 +1,12 @@
 <?php
-/**
- * @author Artur Doruch <arturdoruch@interia.pl>
- */
 
 namespace ArturDoruch\FlashMessageBundle\Templating\Helper;
 
 use Symfony\Component\Templating\Helper\Helper;
 
-
+/**
+ * @author Artur Doruch <arturdoruch@interia.pl>
+ */
 class FlashMessageHelper extends Helper
 {
     /**
@@ -37,6 +36,7 @@ class FlashMessageHelper extends Helper
 
     /**
      * @param string $type Message type
+     *
      * @return string Message html tag class name based on message type
      */
     public function getMessageClassName($type)
